@@ -11,7 +11,7 @@ This WordPress plugin adds a gender selection field to the user registration for
 - Allows users to update their gender in their profile settings.
 
 ## Installation
-1. Download the `user-sex-preselect.php` file.
+1. Download
 2. Upload the file to the `/wp-content/plugins/` directory.
 3. Activate the plugin in the WordPress admin panel under **Plugins**.
 
