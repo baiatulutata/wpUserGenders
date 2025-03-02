@@ -1,4 +1,4 @@
-# User Sex Preselection Plugin
+# User Gender Preselection Plugin
 
 ## Description
 This WordPress plugin adds a gender selection field to the user registration form, allowing users to select from a diverse set of gender identities. The selected gender is stored as user metadata and can be edited in the user profile.
