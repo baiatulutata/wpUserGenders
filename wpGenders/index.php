@@ -4,31 +4,38 @@
  * Description: Adds a preselected gender field to the WordPress registration form.
  * Version: 1.2
  * Author: Ionut Baldazar
+* Text Domain: user-gender-preselect
+ * Domain Path: /languages
  */
+// Load plugin text domain for translations
+function usp_load_textdomain() {
+    load_plugin_textdomain('user-gender-preselect', false, dirname(plugin_basename(__FILE__)) . '/languages');
+}
+add_action('plugins_loaded', 'usp_load_textdomain');
 
 // Add the gender field to the registration form
 function usp_add_gender_field() {
     ?>
     <p>
-        <label for="gender">Gender<br/>
+        <label for="gender"><?php _e('Gender', 'user-gender-preselect'); ?><br/>
             <select name="gender" id="gender">
-                <option value="male" selected>Male</option>
-                <option value="female">Female</option>
-                <option value="non_binary">Non-binary</option>
-                <option value="transgender">Transgender</option>
-                <option value="genderqueer">Genderqueer</option>
-                <option value="agender">Agender</option>
-                <option value="genderfluid">Genderfluid</option>
-                <option value="hijra">Hijra</option>
-                <option value="neutrois">Neutrois</option>
-                <option value="bigender">Bigender</option>
-                <option value="demiboy">Demiboy</option>
-                <option value="demigirl">Demigirl</option>
-                <option value="androgyne">Androgyne</option>
-                <option value="two_spirit">Two-Spirit</option>
-                <option value="pangender">Pangender</option>
-                <option value="other">Other</option>
-                <option value="prefer_not_to_say">Prefer not to say</option>
+                <option value="male" selected><?php _e('Male', 'user-gender-preselect'); ?></option>
+                <option value="female"><?php _e('Female', 'user-gender-preselect'); ?></option>
+                <option value="non_binary"><?php _e('Non-binary', 'user-gender-preselect'); ?></option>
+                <option value="transgender"><?php _e('Transgender', 'user-gender-preselect'); ?></option>
+                <option value="genderqueer"><?php _e('Genderqueer', 'user-gender-preselect'); ?></option>
+                <option value="agender"><?php _e('Agender', 'user-gender-preselect'); ?></option>
+                <option value="genderfluid"><?php _e('Genderfluid', 'user-gender-preselect'); ?></option>
+                <option value="hijra"><?php _e('Hijra', 'user-gender-preselect'); ?></option>
+                <option value="neutrois"><?php _e('Neutrois', 'user-gender-preselect'); ?></option>
+                <option value="bigender"><?php _e('Bigender', 'user-gender-preselect'); ?></option>
+                <option value="demiboy"><?php _e('Demiboy', 'user-gender-preselect'); ?></option>
+                <option value="demigirl"><?php _e('Demigirl', 'user-gender-preselect'); ?></option>
+                <option value="androgyne"><?php _e('Androgyne', 'user-gender-preselect'); ?></option>
+                <option value="two_spirit"><?php _e('Two-Spirit', 'user-gender-preselect'); ?></option>
+                <option value="pangender"><?php _e('Pangender', 'user-gender-preselect'); ?></option>
+                <option value="other"><?php _e('Other', 'user-gender-preselect'); ?></option>
+                <option value="prefer_not_to_say"><?php _e('Prefer not to say', 'user-gender-preselect'); ?></option>
             </select>
         </label>
     </p>
@@ -40,7 +47,7 @@ add_action('register_form', 'usp_add_gender_field');
 function usp_validate_gender_field($errors, $sanitized_user_login, $user_email) {
     $valid_genders = ['male', 'female', 'non_binary', 'transgender', 'genderqueer', 'agender', 'genderfluid', 'hijra', 'neutrois', 'bigender', 'demiboy', 'demigirl', 'androgyne', 'two_spirit', 'pangender', 'other', 'prefer_not_to_say'];
     if (!isset($_POST['gender']) || !in_array($_POST['gender'], $valid_genders)) {
-        $errors->add('gender_error', '<strong>ERROR</strong>: Please select a valid gender.');
+        $errors->add('gender_error', '<strong>' . __('ERROR', 'user-gender-preselect') . '</strong>: ' . __('Please select a valid gender.', 'user-gender-preselect'));
     }
     return $errors;
 }
@@ -57,29 +64,18 @@ add_action('user_register', 'usp_save_gender_field');
 // Display the gender field in the user profile
 function usp_show_gender_field($user) {
     ?>
-    <h3>Additional Information</h3>
+    <h3><?php _e('Additional Information', 'user-gender-preselect'); ?></h3>
     <table class="form-table">
         <tr>
-            <th><label for="gender">Gender</label></th>
+            <th><label for="gender"><?php _e('Gender', 'user-gender-preselect'); ?></label></th>
             <td>
                 <select name="gender" id="gender">
-                    <option value="male" <?php selected(get_user_meta($user->ID, 'gender', true), 'male'); ?>>Male</option>
-                    <option value="female" <?php selected(get_user_meta($user->ID, 'gender', true), 'female'); ?>>Female</option>
-                    <option value="non_binary" <?php selected(get_user_meta($user->ID, 'gender', true), 'non_binary'); ?>>Non-binary</option>
-                    <option value="transgender" <?php selected(get_user_meta($user->ID, 'gender', true), 'transgender'); ?>>Transgender</option>
-                    <option value="genderqueer" <?php selected(get_user_meta($user->ID, 'gender', true), 'genderqueer'); ?>>Genderqueer</option>
-                    <option value="agender" <?php selected(get_user_meta($user->ID, 'gender', true), 'agender'); ?>>Agender</option>
-                    <option value="genderfluid" <?php selected(get_user_meta($user->ID, 'gender', true), 'genderfluid'); ?>>Genderfluid</option>
-                    <option value="hijra" <?php selected(get_user_meta($user->ID, 'gender', true), 'hijra'); ?>>Hijra</option>
-                    <option value="neutrois" <?php selected(get_user_meta($user->ID, 'gender', true), 'neutrois'); ?>>Neutrois</option>
-                    <option value="bigender" <?php selected(get_user_meta($user->ID, 'gender', true), 'bigender'); ?>>Bigender</option>
-                    <option value="demiboy" <?php selected(get_user_meta($user->ID, 'gender', true), 'demiboy'); ?>>Demiboy</option>
-                    <option value="demigirl" <?php selected(get_user_meta($user->ID, 'gender', true), 'demigirl'); ?>>Demigirl</option>
-                    <option value="androgyne" <?php selected(get_user_meta($user->ID, 'gender', true), 'androgyne'); ?>>Androgyne</option>
-                    <option value="two_spirit" <?php selected(get_user_meta($user->ID, 'gender', true), 'two_spirit'); ?>>Two-Spirit</option>
-                    <option value="pangender" <?php selected(get_user_meta($user->ID, 'gender', true), 'pangender'); ?>>Pangender</option>
-                    <option value="other" <?php selected(get_user_meta($user->ID, 'gender', true), 'other'); ?>>Other</option>
-                    <option value="prefer_not_to_say" <?php selected(get_user_meta($user->ID, 'gender', true), 'prefer_not_to_say'); ?>>Prefer not to say</option>
+                    <?php
+                    $genders = ['male', 'female', 'non_binary', 'transgender', 'genderqueer', 'agender', 'genderfluid', 'hijra', 'neutrois', 'bigender', 'demiboy', 'demigirl', 'androgyne', 'two_spirit', 'pangender', 'other', 'prefer_not_to_say'];
+                    foreach ($genders as $gender) {
+                        echo '<option value="' . esc_attr($gender) . '" ' . selected(get_user_meta($user->ID, 'gender', true), $gender, false) . '>' . esc_html__($gender, 'user-gender-preselect') . '</option>';
+                    }
+                    ?>
                 </select>
             </td>
         </tr>
