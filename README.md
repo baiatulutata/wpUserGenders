@@ -43,5 +43,5 @@ Once activated:
 This plugin is open-source and can be freely modified and distributed.
 
 ## Author
-Developed by Your Name. Contributions and suggestions are welcome!
+Developed by Ionut Baldazar. Contributions and suggestions are welcome!
 
